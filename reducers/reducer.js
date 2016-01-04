@@ -2,30 +2,13 @@ import { combineReducers } from 'redux'
 import { GET_DAILY_COMMITS, RECEIVE_DAILY_COMMITS} from '../actions/actions.js';
 import _ from 'lodash';
 import {colors} from '../config/chart.js';
+import moment from 'moment';
 
 const dailyCommitsStore = {
   isFetching: false,
-  rows: [],
-  options: {
-    margin: {top: 20, left: 20, right: 20, bottom: 20},
-    width: 600,
-    height: 600,
-    color: '#2980B9',
-    r: 100,
-    R: 200,
-    legendPosition: 'topLeft',
-    animate:{
-      type:'oneByOne',
-      duration:200,
-      fillTransition:3
-    },
-    label:{
-      fontFamily:'Arial',
-      fontSize:14,
-      fontWeight:true,
-      fill:'#ECF0F1'
-    }
-  }
+  data: [],
+  minDate: null,
+  maxDate: null
 };
 
 function parseDailyCommits(commits) {
@@ -47,6 +30,17 @@ function parseDailyCommits(commits) {
     }, []);
 }
 
+function findDate(limit, commits){
+  // const flatten = _.pluck(commits, 'date').map(date => new Date(date));
+  const flatten = _.pluck(commits, 'date').map(date => moment(date));
+  switch(limit){
+    case 'MAX':
+      return _.max(flatten).format('MMMM Do YYYY');
+    case 'MIN':
+      return _.min(flatten).format('MMMM Do YYYY');
+  }
+}
+
 function dailyCommits(state = dailyCommitsStore, action){
   switch(action.type) {
     case GET_DAILY_COMMITS:
@@ -56,7 +50,9 @@ function dailyCommits(state = dailyCommitsStore, action){
     case RECEIVE_DAILY_COMMITS:
       return Object.assign({}, state, {
         isFetching: false,
-        rows: parseDailyCommits(action.data),
+        data: parseDailyCommits(action.data),
+        minDate: findDate('MIN', action.data),
+        maxDate: findDate('MAX', action.data)
       });
     default:
       return state
