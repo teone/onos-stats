@@ -10,10 +10,12 @@
   "author": "Matteo Scandolo",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^1.0.2",
     "es6-promise": "^3.0.2",
-    "immutable": "^3.7.5",
     "isomorphic-fetch": "^2.2.0",
+    "lodash": "^3.10.1",
     "react": "^0.14.2",
+    "react-chartjs": "jhudson8/react-chartjs",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
