@@ -22,7 +22,7 @@
     "domain": "att.us",
     "lines_removed": 4,
     "lines_added": 8,
-    "module": "apps",
+    "module": "southbound",
     "dev_name": "Mahesh Poojary Huawei",
     "date": "2015-12-05"
   },
@@ -40,7 +40,7 @@
     "domain": "huawei.com",
     "lines_removed": 4,
     "lines_added": 8,
-    "module": "apps",
+    "module": "southbound",
     "dev_name": "Mahesh Poojary Huawei",
     "date": "2015-12-05"
   },
@@ -58,7 +58,7 @@
     "domain": "onlab.us",
     "lines_removed": 4,
     "lines_added": 8,
-    "module": "apps",
+    "module": "southbound",
     "dev_name": "Mahesh Poojary Huawei",
     "date": "2015-12-05"
   },

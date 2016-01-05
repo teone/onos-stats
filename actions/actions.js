@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch'
 // define action types
 export const GET_DAILY_COMMITS = 'GET_DAILY_COMMITS';
 export const RECEIVE_DAILY_COMMITS = 'RECEIVE_DAILY_COMMITS';
+export const FILTER_COMMIT_BY_MODULE = 'FILTER_COMMIT_BY_MODULE';
 
 // Start the request
 export function getDailyCommits() {
@@ -16,6 +17,13 @@ export function receiveDailyCommits(json) {
   return{
     type: RECEIVE_DAILY_COMMITS,
     data: json
+  }
+}
+
+export function filterCommitByModule(moduleId){
+  return{
+    type: FILTER_COMMIT_BY_MODULE,
+    data: {id: moduleId}
   }
 }
 
