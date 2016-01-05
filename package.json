@@ -1,7 +1,7 @@
 {
   "name": "onos-chart",
   "version": "1.0.0",
-  "description": "",
+  "description": "Statistics on onos project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
