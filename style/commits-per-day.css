@@ -1,0 +1,7 @@
+.commits-per-day input {
+  width: 100%;
+}
+
+.commits-per-day .reset-date {
+  margin-top: 22px;
+}
