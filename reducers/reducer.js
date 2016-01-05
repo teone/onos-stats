@@ -83,7 +83,9 @@ function dailyCommits(state = dailyCommitsStore, action){
     case FILTER_COMMIT_BY_MODULE:
       return Object.assign({}, state, {
         data: parseDailyCommits(filterByModule(action.data.id, state.response)),
-        selectedModule: action.data.id
+        selectedModule: action.data.id,
+        minDate: findDate('MIN', filterByModule(action.data.id, state.response)),
+        maxDate: findDate('MAX', filterByModule(action.data.id, state.response))
       });
     default:
       return state

@@ -38,7 +38,7 @@ const DailyCommits = ({dailyCommits, dispatch}) => (
       </ul>
     </div>
     <div className="col-sm-6">
-      <PieChart data={dailyCommits.data}/>
+      <PieChart data={dailyCommits.data} redraw/>
       <div>
         From: {dailyCommits.minDate} <br/>
         To: {dailyCommits.maxDate}
