@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Chart from 'chart.js';
 import { Pie as PieChart } from 'react-chartjs';
 import { filterCommitByModule, filterCommitByDate } from '../actions/actions.js';
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
 
 require('react-datepicker/dist/react-datepicker.css');
+require('../style/commits-per-day.css');
+
+Chart.defaults.global.responsive = true;
 
 const DailyCommits = ({dailyCommits, dispatch}) => (
-  <div className="row">
+  <div className="row commits-per-day">
     <h1>Commits per day</h1>
     {dailyCommits.isFetching ? 'loading':null}
     <div className="col-sm-6">
@@ -46,15 +50,15 @@ const DailyCommits = ({dailyCommits, dispatch}) => (
           <DatePicker
             selected={dailyCommits.minDate}
             onChange={(date) => dispatch(filterCommitByDate(date, dailyCommits.maxDate))}
-            minDate={dailyCommits.minDate}
-            maxDate={dailyCommits.maxDate}/>
+            minDate={dailyCommits.firstDate}
+            maxDate={dailyCommits.lastDate}/>
         </div>
         <div className="col-sm-6">
           <DatePicker
             selected={dailyCommits.maxDate}
             onChange={(date) => dispatch(filterCommitByDate(dailyCommits.minDate, date))}
-            minDate={dailyCommits.minDate}
-            maxDate={dailyCommits.maxDate}/>
+            minDate={dailyCommits.firstDate}
+            maxDate={dailyCommits.lastDate}/>
         </div>
       </div>
     </div>
