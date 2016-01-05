@@ -10,10 +10,15 @@
   "author": "Matteo Scandolo",
   "license": "ISC",
   "dependencies": {
+    "bootstrap-css-only": "^3.3.5",
+    "chart.js": "^1.0.2",
+    "classnames": "^2.2.2",
     "es6-promise": "^3.0.2",
-    "immutable": "^3.7.5",
     "isomorphic-fetch": "^2.2.0",
+    "lodash": "^3.10.1",
+    "moment": "^2.11.0",
     "react": "^0.14.2",
+    "react-chartjs": "jhudson8/react-chartjs",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
@@ -27,6 +32,13 @@
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
-    "eslint-plugin-react": "^3.13.1"
+    "css-loader": "^0.23.1",
+    "eslint-plugin-react": "^3.13.1",
+    "file-loader": "^0.8.5",
+    "node-sass": "^3.4.2",
+    "resolve-url-loader": "^1.4.3",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7"
   }
 }
