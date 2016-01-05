@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Chart from 'chart.js';
 import { Pie as PieChart } from 'react-chartjs';
-import { filterCommitByModule, filterCommitByDate } from '../actions/actions.js';
+import { filterCommitByModule, filterCommitByDate, resetDateFilter } from '../actions/actions.js';
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
 
@@ -13,7 +13,7 @@ Chart.defaults.global.responsive = true;
 
 const DailyCommits = ({dailyCommits, dispatch}) => (
   <div className="row commits-per-day">
-    <h1>Commits per day</h1>
+    <h1 className="text-center">Commits per day</h1>
     {dailyCommits.isFetching ? 'loading':null}
     <div className="col-sm-6">
       <h2>Companies</h2>
@@ -46,19 +46,24 @@ const DailyCommits = ({dailyCommits, dispatch}) => (
     <div className="col-sm-6">
       <PieChart data={dailyCommits.data} redraw/>
       <div className="row">
-        <div className="col-sm-6">
+        <div className="col-sm-5">
+          <label>Start Date:</label>
           <DatePicker
             selected={dailyCommits.minDate}
             onChange={(date) => dispatch(filterCommitByDate(date, dailyCommits.maxDate))}
             minDate={dailyCommits.firstDate}
             maxDate={dailyCommits.lastDate}/>
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-5">
+          <label>End Date:</label>
           <DatePicker
             selected={dailyCommits.maxDate}
             onChange={(date) => dispatch(filterCommitByDate(dailyCommits.minDate, date))}
             minDate={dailyCommits.firstDate}
             maxDate={dailyCommits.lastDate}/>
+        </div>
+        <div className="col-sm-2 text-right">
+          <a className="btn btn-default reset-date" onClick={() => dispatch(resetDateFilter())}>Reset</a>
         </div>
       </div>
     </div>

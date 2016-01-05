@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GET_DAILY_COMMITS, RECEIVE_DAILY_COMMITS, FILTER_COMMIT_BY_MODULE, FILTER_COMMIT_BY_DATE} from '../actions/actions.js';
+import { GET_DAILY_COMMITS, RECEIVE_DAILY_COMMITS, FILTER_COMMIT_BY_MODULE, FILTER_COMMIT_BY_DATE, RESET_COMMIT_DATE_FILTER} from '../actions/actions.js';
 import _ from 'lodash';
 import {colors} from '../config/chart.js';
 import moment from 'moment';
@@ -107,6 +107,11 @@ function dailyCommits(state = dailyCommitsStore, action){
         data: parseDailyCommits(applyDateFilter(state.response, action.data.minDate.toDate(), action.data.maxDate.toDate(), state.selectedModule)),
         minDate: action.data.minDate,
         maxDate: action.data.maxDate
+      });
+    case RESET_COMMIT_DATE_FILTER:
+      return Object.assign({}, state, {
+        minDate: state.firstDate,
+        maxDate: state.lastDate
       });
     default:
       return state

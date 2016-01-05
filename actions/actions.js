@@ -5,6 +5,7 @@ export const GET_DAILY_COMMITS = 'GET_DAILY_COMMITS';
 export const RECEIVE_DAILY_COMMITS = 'RECEIVE_DAILY_COMMITS';
 export const FILTER_COMMIT_BY_MODULE = 'FILTER_COMMIT_BY_MODULE';
 export const FILTER_COMMIT_BY_DATE = 'FILTER_COMMIT_BY_DATE';
+export const RESET_COMMIT_DATE_FILTER = 'RESET_COMMIT_DATE_FILTER';
 
 // Start the request
 export function getDailyCommits() {
@@ -32,6 +33,12 @@ export function filterCommitByDate(minDate, maxDate){
   return{
     type: FILTER_COMMIT_BY_DATE,
     data: {minDate: minDate, maxDate: maxDate}
+  }
+}
+
+export function resetDateFilter(){
+  return {
+    type: RESET_COMMIT_DATE_FILTER
   }
 }
 
