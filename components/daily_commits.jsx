@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Pie as PieChart } from 'react-chartjs';
-import { filterCommitByModule } from '../actions/actions.js';
+import { filterCommitByModule, filterCommitByDate } from '../actions/actions.js';
 import classNames from 'classnames';
+import DatePicker from 'react-datepicker';
+
+require('react-datepicker/dist/react-datepicker.css');
 
 const DailyCommits = ({dailyCommits, dispatch}) => (
   <div className="row">
@@ -38,9 +41,21 @@ const DailyCommits = ({dailyCommits, dispatch}) => (
     </div>
     <div className="col-sm-6">
       <PieChart data={dailyCommits.data} redraw/>
-      <div>
-        From: {dailyCommits.minDate} <br/>
-        To: {dailyCommits.maxDate}
+      <div className="row">
+        <div className="col-sm-6">
+          <DatePicker
+            selected={dailyCommits.minDate}
+            onChange={(date) => dispatch(filterCommitByDate(date, dailyCommits.maxDate))}
+            minDate={dailyCommits.minDate}
+            maxDate={dailyCommits.maxDate}/>
+        </div>
+        <div className="col-sm-6">
+          <DatePicker
+            selected={dailyCommits.maxDate}
+            onChange={(date) => dispatch(filterCommitByDate(dailyCommits.minDate, date))}
+            minDate={dailyCommits.minDate}
+            maxDate={dailyCommits.maxDate}/>
+        </div>
       </div>
     </div>
   </div>

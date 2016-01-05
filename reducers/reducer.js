@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GET_DAILY_COMMITS, RECEIVE_DAILY_COMMITS, FILTER_COMMIT_BY_MODULE} from '../actions/actions.js';
+import { GET_DAILY_COMMITS, RECEIVE_DAILY_COMMITS, FILTER_COMMIT_BY_MODULE, FILTER_COMMIT_BY_DATE} from '../actions/actions.js';
 import _ from 'lodash';
 import {colors} from '../config/chart.js';
 import moment from 'moment';
@@ -38,9 +38,9 @@ function findDate(limit, commits){
   const flatten = _.pluck(commits, 'date').map(date => moment(date));
   switch(limit){
     case 'MAX':
-      return _.max(flatten).format('MMMM Do YYYY');
+      return _.max(flatten);
     case 'MIN':
-      return _.min(flatten).format('MMMM Do YYYY');
+      return _.min(flatten);
   }
 }
 
@@ -50,7 +50,7 @@ function listModules(commits){
     .reduce((list, item, i) => {
       list.push({
         label: item,
-        value: byModule[item].length * 2,
+        value: byModule[item].length,
         id: i + 1,
         color: colors[i]
       });
@@ -58,12 +58,18 @@ function listModules(commits){
     }, [])];
 }
 
-const filterByModule = _.memoize((module, list) => {
+const filterByModule = (module, list) => {
   if(module !== 'All'){
     return _.filter(list, {module: module})
   }
   return list;
-});
+};
+
+function filterByDate(list, minDate, maxDate, module){
+  return filterByModule(module, _.filter(list, (item) => {
+    return moment(item.date).toDate() >= minDate && moment(item.date).toDate() <= maxDate;
+  }))
+}
 
 function dailyCommits(state = dailyCommitsStore, action){
   switch(action.type) {
@@ -84,8 +90,14 @@ function dailyCommits(state = dailyCommitsStore, action){
       return Object.assign({}, state, {
         data: parseDailyCommits(filterByModule(action.data.id, state.response)),
         selectedModule: action.data.id,
-        minDate: findDate('MIN', filterByModule(action.data.id, state.response)),
-        maxDate: findDate('MAX', filterByModule(action.data.id, state.response))
+        minDate: findDate('MIN', filterByModule(action.data.id, state.response)), //this is not true, filtering by module could strip date
+        maxDate: findDate('MAX', filterByModule(action.data.id, state.response))  //this is not true, filtering by module could strip date
+      });
+    case FILTER_COMMIT_BY_DATE:
+      return Object.assign({}, state, {
+        data: parseDailyCommits(filterByDate(state.response, action.data.minDate.toDate(), action.data.maxDate.toDate(), state.selectedModule)),
+        minDate: action.data.minDate,
+        maxDate: action.data.maxDate
       });
     default:
       return state
