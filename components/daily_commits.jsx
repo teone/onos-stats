@@ -19,7 +19,6 @@ const DailyCommits = ({dailyCommits, dispatch}) => (
         )}
       </ul>
       <h2>Modules</h2>
-      {dailyCommits.selectedModule}
       <ul className="list-group">
         {
           dailyCommits.modules.map(module => {

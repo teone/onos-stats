@@ -50,7 +50,7 @@ function listModules(commits){
     .reduce((list, item, i) => {
       list.push({
         label: item,
-        value: byModule[item].length,
+        value: byModule[item].length * 2,
         id: i + 1,
         color: colors[i]
       });
