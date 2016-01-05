@@ -19,6 +19,7 @@
     "moment": "^2.11.0",
     "react": "^0.14.2",
     "react-chartjs": "jhudson8/react-chartjs",
+    "react-datepicker": "^0.17.0",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
