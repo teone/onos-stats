@@ -45,6 +45,7 @@ export function resetDateFilter(){
 export function fetchDailyCommits() {
   return dispatch => {
     dispatch(getDailyCommits())
+    // return fetch(`getbasicjson/git_commits_day`)
     return fetch(`../gitCommitDay.json`)
       .then(response => response.json())
       .then(json => dispatch(receiveDailyCommits(json)))

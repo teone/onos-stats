@@ -5,3 +5,7 @@
 .commits-per-day .reset-date {
   margin-top: 22px;
 }
+
+.btn > .badge {
+  float: right;
+}

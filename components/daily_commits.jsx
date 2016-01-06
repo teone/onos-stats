@@ -66,6 +66,26 @@ const DailyCommits = ({dailyCommits, dispatch}) => (
           <a className="btn btn-default reset-date" onClick={() => dispatch(resetDateFilter())}>Reset</a>
         </div>
       </div>
+      <div className="row">
+        {
+          dailyCommits.modules.map(module => {
+            const classes = classNames({
+              'btn': true,
+              'full-width': true,
+              'btn-default': dailyCommits.selectedModule !== module.label,
+              'btn-primary': dailyCommits.selectedModule === module.label
+            })
+            return <div className="col-xs-3">
+              <a className={classes} 
+                key={module.id}
+                onClick={() => dispatch(filterCommitByModule(module.label))}>
+                  {module.label}
+                  <span className="badge">{module.value}</span>
+              </a>
+            </div>
+          }
+        )}
+      </div>
     </div>
   </div>
 )
