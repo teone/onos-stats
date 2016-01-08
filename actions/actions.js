@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch'
 // define action types
 export const GET_DAILY_COMMITS = 'GET_DAILY_COMMITS';
 export const RECEIVE_DAILY_COMMITS = 'RECEIVE_DAILY_COMMITS';
+export const PARSE_DAILY_COMMITS = 'PARSE_DAILY_COMMITS';
 export const FILTER_COMMIT_BY_MODULE = 'FILTER_COMMIT_BY_MODULE';
 export const FILTER_COMMIT_BY_DATE = 'FILTER_COMMIT_BY_DATE';
 export const RESET_COMMIT_DATE_FILTER = 'RESET_COMMIT_DATE_FILTER';
@@ -18,6 +19,14 @@ export function getDailyCommits() {
 export function receiveDailyCommits(json) {
   return{
     type: RECEIVE_DAILY_COMMITS,
+    data: json
+  }
+}
+
+// dispatch an action when the response arrive
+export function parseDailyCommits(json) {
+  return{
+    type: PARSE_DAILY_COMMITS,
     data: json
   }
 }
@@ -45,9 +54,10 @@ export function resetDateFilter(){
 export function fetchDailyCommits() {
   return dispatch => {
     dispatch(getDailyCommits())
-    // return fetch(`getbasicjson/git_commits_day`)
-    return fetch(`../gitCommitDay.json`)
+    return fetch(`getbasicjson/companies_stats`)
+    // return fetch(`../gitCommitDay.json`)
       .then(response => response.json())
       .then(json => dispatch(receiveDailyCommits(json)))
+      .then(action => dispatch(parseDailyCommits(action.data)))
   }
 }

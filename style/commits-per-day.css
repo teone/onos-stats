@@ -6,6 +6,19 @@
   margin-top: 22px;
 }
 
+.commits-per-day .module-container {
+  margin-top: 20px;
+}
+
+.commits-per-day .module-selector,
+.commits-per-day .chart-container {
+  margin-bottom: 20px;
+}
+
+.commits-per-day .company-container span.badge {
+    width: 20%;
+}
+
 .btn > .badge {
   float: right;
 }
